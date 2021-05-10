@@ -22,7 +22,7 @@ public class MyBatisSqlSession {
 		factoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
 		return factoryBean;
 	}
-
+	
 	@Bean
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);

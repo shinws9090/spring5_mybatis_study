@@ -13,7 +13,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-public class ContestDataSource {
+public class ContextDataSource {
 
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
