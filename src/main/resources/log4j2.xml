@@ -7,8 +7,7 @@
 		<RollingFile name="RollingFile_Daily">
 			<FileName>./logs/spring5_mybatis_study.log</FileName>
 			<FilePattern>./logs/time-based-logs/%d{yyyy-MM-dd}.log</FilePattern>
-			<PatternLayout
-				pattern="[%-5level] [%d{yyyy-MM-dd HH:mm}] %m%n" />
+			<PatternLayout pattern="[%-5level] [%d{yyyy-MM-dd HH:mm}] %m%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
 			</Policies>
