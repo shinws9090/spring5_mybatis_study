@@ -44,6 +44,7 @@ public class TutorMapperTest {
 		Assert.assertEquals(tutor.getTutorId(), findTutor.getTutorId());
 		
 		log.trace(tutor.getTutorId() + " : " + tutor.getName());
+		log.debug(tutor.toString());
 		
 		List<Course> list = tutor.getCourses();
 		Assert.assertNotNull(list); 

@@ -12,6 +12,18 @@ public class Course {
 	
 	
 	
+	public Course() {
+		// TODO Auto-generated constructor stub
+	}
+	public Course(int courseId, String name, String description, Date startDate, Date endDate, int tutorId) {
+		super();
+		this.courseId = courseId;
+		this.name = name;
+		this.description = description;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.tutorId = tutorId;
+	}
 	public int getCourseId() {
 		return courseId;
 	}

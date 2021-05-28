@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Configuration
 @Import({ContextDataSource.class,ContextSqlSession.class})
-@ComponentScan(basePackages = {"spring5_mybatis_study.mapper"})
+@ComponentScan(basePackages = {"spring5_mybatis_study.mapper","spring5_mybatis_study.service"})
 public class ContextRoot {
 
 }

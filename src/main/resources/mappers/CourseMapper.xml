@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mappers.CourseMapper">
+<mapper namespace="spring5_mybatis_study.mapper.CourseMapper">
 
 	<resultMap type="Course" id="ResCourse">
 		<id property="courseId" column="course_id"/>
@@ -8,7 +8,116 @@
 		<result property="description" column="description"/>
 		<result property="startDate" column="start_date"/>
 		<result property="endDate" column="end_date"/>
-		<result property="tutorId" column="tutorId"/>
+		<result property="tutorId" column="tutor_id"/>
 	</resultMap>
 	
+	<sql id="selectSql">
+		select course_id, name, description, start_date, end_date, tutor_id from courses
+	</sql>
+	<sql id="whereSql">
+		<where>
+			<if test="tutorId !=null">
+				and tutor_id = #{tutorId}
+			</if>
+			<if test="courseName !=null">
+				and name like #{courseName}
+			</if>
+			<if test="startDate !=null">
+				<!-- and start_date &gt;= #{startDate} -->
+				<![CDATA[and start_date >= #{startDate}]]>
+			</if>
+			<if test="endData !=null">
+				and end_date &lt;= #{endData}
+			</if>
+		</where>
+	</sql>
+	<sql id="whereSqlCDATA">
+		<where>
+			<if test="tutorId !=null">
+				<![CDATA[and tutor_id = #{tutorId}]]>
+			</if>
+			<if test="courseName !=null">
+				<![CDATA[and name like #{courseName}]]>
+			</if>
+			<if test="startDate !=null">
+				<![CDATA[and start_date >= #{startDate}]]>
+			</if>
+			<if test="endData !=null">
+				<![CDATA[and end_date <= #{endData}]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectCoursesByCondition" parameterType="map" resultType="Course">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	<select id="selectCaseCourses" resultType="Course">
+		<include refid="selectSql"/>
+		<where>
+			<choose>
+				<when test="serchby=='tutor'">
+					and tutor_id = #{tutorId}
+				</when>
+				<when test="serchby=='courseName'">
+					and name like #{courseName}
+				</when>
+				<otherwise>
+					end_date &lt;=now()
+				</otherwise>
+			</choose>
+		</where>
+		
+	</select>
+	
+	<select id="selectWhereCourses" parameterType="map" resultType="Course">
+		<include refid="selectSql"/>
+		<include refid="whereSqlCDATA"/>
+	</select>
+	
+	<select id="selectTrimCourses" resultType="Course">
+		<include refid="selectSql"/>
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="tutorId != null">
+				tutor_id = #{tutorId}
+			</if>
+			<if test="courseName != null">
+				name = #{courseName}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="selectCoursesForeachByTutors" resultType="Course">
+		<include refid="selectSql"/>
+		where tutor_id in
+		<foreach collection="tutorIds" item="t" index="i" open="(" separator="," close=")">
+			#{t}
+		</foreach>
+	</select>
+	
+	<insert id="insertCourses">
+		insert into courses(course_id, name, description, start_date, end_date, tutor_id) values
+		<foreach collection="course" item="c" separator=",">
+			(#{c.courseId},#{c.name},#{c.description},#{c.startDate},#{c.endDate},#{c.tutorId})
+		</foreach>
+	</insert>
+	<delete id="deleteCourses">
+		delete from courses
+		where course_id in
+		<foreach collection="couresIds" item="c" open="(" separator="," close=")">
+			#{c}
+		</foreach>
+	</delete>
+	<update id="updateSetCourses">
+		update courses
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="startDate != null">start_date=#{startDate},</if>
+			<if test="endDate != null">end_date=#{endDate},</if>
+			<if test="tutorId > 0">tutor_id=#{tutorId},</if>
+		</set>
+		where course_id=#{courseId}
+	</update>
 </mapper>

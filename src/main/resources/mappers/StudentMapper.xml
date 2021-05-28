@@ -3,13 +3,15 @@
 <mapper namespace="spring5_mybatis_study.mapper.StudentMapper"> <!-- 패키지 위치 지정해야됨 -->
 
 	<sql id="selectSQL">
-		select stud_id, name, email, phone, dob
+		select stud_id, name, email, phone, dob ,gender
 		from students
 	</sql>
 	<sql id="whereSQL">
-		<if test="studId != null">
-			where stud_id =#{studId}
-		</if>
+		<where>
+			<if test="studId != null">
+			 	stud_id =#{studId}
+			</if>
+		</where>
 	</sql>
 
 	<select id="selectStudentById" parameterType="Student"
@@ -70,15 +72,63 @@
 	</resultMap>
 	
 	<resultMap type="Student" id="StudentAssociation" extends="StudentREsult">
-		<association property="address" resultMap="mappers.AddressMapper.AddressResultMap"/>
+		<association property="address" resultMap="spring5_mybatis_study.mapper.AddressMapper."/>
 	</resultMap>
 	
 	<select id="selectStudentByNoAssociation" resultMap="StudentREsult">
 		select stud_id, name, email, phone, dob, 
 			a.addr_id, street, city, state, zip, country
-		from students s join addresses a on s.addr_id =a.addr_id
+		from students s 
+		join addresses a 
+		on s.addr_id =a.addr_id
 		<include refid="whereSQL"/>
 	</select>
 	
+	
+	
+	<!-- enum 타입 다루기 -->
+	<insert id="insertEnumStudent" parameterType="Student">
+		insert into students(stud_id, name, email,phone, dob, gender) 
+			values(#{studId}, #{name}, #{email}, #{phone}, #{dob}, #{gender})
+	</insert>
+	
+	
+	
+	<sql id="where_name_email">
+		<where>
+			<if test="name != null">
+				and name = #{name}
+			</if>
+			<if test="email != null">
+				and email = #{email}
+			</if>
+		</where>
+	</sql>
+	<select id="selectStudentByMap" resultType="Student">
+		<include refid="selectSQL"/>
+		<include refid="where_name_email"/>
+	</select>	
+	<select id="selectAllStudentByMap" resultType="Student">
+		<include refid="selectSQL"/>
+		<include refid="where_name_email"/>
+	</select>	
+	
+	
+	<!-- ResultSet 처리방식의 재정의 -->
+	<select id="selectStudentForMap" parameterType="int" resultMap="StudentREsult">
+		<include refid="selectSQL"/>
+		<include refid="whereSQL"/>
+	</select>
+	
+	<update id="updateSetStudent">
+		update students
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="dob != null">dob=#{dob},</if>
+		</set>
+		<include refid="whereSQL"/>
+	</update>
 	
 </mapper>

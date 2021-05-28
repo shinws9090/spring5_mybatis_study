@@ -6,12 +6,12 @@
 		<id property="tutorId" column="tutor_id"/>
 		<result property="name" column="name"/>
 		<result property="email" column="email"/>
-		<collection property="courses" resultMap="mappers.CourseMapper.ResCourse"/>
+		<collection property="courses" resultMap="spring5_mybatis_study.mapper.CourseMapper.ResCourse"/>
 	</resultMap>
 	
 	<select id="selectTutorById" parameterType="Tutor" resultMap="ResTutor">
 		select t.tutor_id, t.name as tutor_name, email, 
-				c.course_id, c.name, description, start_date, end_date
+			c.course_id, c.name, description, start_date, end_date
 			from tutors t left outer join courses c on t.tutor_id=c.tutor_id
 			where t.tutor_id=#{tutorId}
 	</select>

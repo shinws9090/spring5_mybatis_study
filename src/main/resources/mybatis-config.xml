@@ -8,6 +8,7 @@
 		<package name="spring5_mybatis_study.dto"/>
 	</typeAliases>
 	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="Gender"/>
 		<package name="spring5_mybatis_study.typehandlers"/>
 	</typeHandlers>
 </configuration>
