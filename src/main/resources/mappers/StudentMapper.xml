@@ -72,7 +72,7 @@
 	</resultMap>
 	
 	<resultMap type="Student" id="StudentAssociation" extends="StudentREsult">
-		<association property="address" resultMap="spring5_mybatis_study.mapper.AddressMapper."/>
+		<association property="address" resultMap="spring5_mybatis_study.mapper.AddressMapper.AddressResultMap"/>
 	</resultMap>
 	
 	<select id="selectStudentByNoAssociation" resultMap="StudentREsult">

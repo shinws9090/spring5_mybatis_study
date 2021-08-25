@@ -12,6 +12,10 @@ public class Course {
 	
 	
 	
+	public Course(int courseId) {
+		super();
+		this.courseId = courseId;
+	}
 	public Course() {
 		// TODO Auto-generated constructor stub
 	}

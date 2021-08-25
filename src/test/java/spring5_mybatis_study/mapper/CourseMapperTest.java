@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import spring5_mybatis_study.config.ContextRoot;
 import spring5_mybatis_study.dto.Course;
 import spring5_mybatis_study.dto.PhoneNumber;
-import spring5_mybatis_study.dto.Member;
+import spring5_mybatis_study.dto.Student;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)

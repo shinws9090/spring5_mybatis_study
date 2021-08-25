@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import spring5_mybatis_study.config.ContextRoot;
 import spring5_mybatis_study.dto.Gender;
 import spring5_mybatis_study.dto.PhoneNumber;
-import spring5_mybatis_study.dto.Member;
+import spring5_mybatis_study.dto.Student;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,9 +44,9 @@ public class StudentMapperTest {
 	public void testSelectStudentById() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Member std = new Member();
+		Student std = new Student();
 		std.setStudId(1);
-		Member selectStd = mapper.selectStudentById(std);
+		Student selectStd = mapper.selectStudentById(std);
 		log.debug(selectStd.toString());
 		Assert.assertNotNull(selectStd);
 	}
@@ -55,9 +55,9 @@ public class StudentMapperTest {
 	public void testSelectStudentByNoWithResultMap() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Member std = new Member();
+		Student std = new Student();
 		std.setStudId(1);
-		Member selectStd = mapper.selectStudentByNoWithResultMap(std);
+		Student selectStd = mapper.selectStudentByNoWithResultMap(std);
 		log.debug(selectStd.toString());
 		Assert.assertNotNull(selectStd);
 	}
@@ -65,7 +65,7 @@ public class StudentMapperTest {
 	@Test
 	public void testSelectStudentByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		List<Member> list = mapper.selectStudentByAll();
+		List<Student> list = mapper.selectStudentByAll();
 		Assert.assertNotNull(list);
 		list.stream().forEach(System.out::println);
 	}
@@ -74,7 +74,7 @@ public class StudentMapperTest {
 	public void test01InsertStudent() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Member std = new Member(3, "토마스", "shis@naver.com", new PhoneNumber("010-000-0000"), new Date());
+		Student std = new Student(3, "토마스", "shis@naver.com", new PhoneNumber("010-000-0000"), new Date());
 
 		int res = mapper.insertStudent(std);
 		Assert.assertEquals(1, res);
@@ -94,7 +94,7 @@ public class StudentMapperTest {
 	public void test02UpdateStudent() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Member std = new Member(3, "으나나나", "홀로로롤@naver.com", new PhoneNumber("010-111-1111"), new Date());
+		Student std = new Student(3, "으나나나", "홀로로롤@naver.com", new PhoneNumber("010-111-1111"), new Date());
 
 		int res = mapper.updateStudent(std);
 		Assert.assertEquals(1, res);
@@ -120,9 +120,9 @@ public class StudentMapperTest {
 	public void testSelectStudentByNoAssociation() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Member std = new Member();
+		Student std = new Student();
 		std.setStudId(1);
-		Member selectStd = mapper.selectStudentByNoAssociation(std);
+		Student selectStd = mapper.selectStudentByNoAssociation(std);
 		Assert.assertNotNull(selectStd);
 		log.debug(selectStd.toString());
 	}
@@ -132,7 +132,7 @@ public class StudentMapperTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Calendar newDate = GregorianCalendar.getInstance();
 		newDate.set(1990, 2, 28);
-		Member student = new Member();
+		Student student = new Student();
 		student.setStudId(3);
 		student.setName("test");
 		student.setEmail("test@test.co.kr");
@@ -161,7 +161,7 @@ public class StudentMapperTest {
 		map.put("name", "Timothy");
 		map.put("email", "timothy@gmail.com");
 		
-		Member std = mapper.selectStudentByMap(map);
+		Student std = mapper.selectStudentByMap(map);
 		Assert.assertNotNull(std);
 		log.debug(std.toString());
 		
@@ -184,7 +184,7 @@ public class StudentMapperTest {
 		map.put("name", "Timothy");
 		map.put("email", "timothy@gmail.com");
 		
-		List<Member> std = mapper.selectAllStudentByMap(map);
+		List<Student> std = mapper.selectAllStudentByMap(map);
 		Assert.assertNotNull(std);
 		log.debug(std.toString());
 		
@@ -208,11 +208,11 @@ public class StudentMapperTest {
 	public void test14updateSetStudent() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Member student = new Member(1, "홍홍홍", "dmmskdk@dndn.com", new PhoneNumber("010-000-0000"), new Date());
+		Student student = new Student(1, "홍홍홍", "dmmskdk@dndn.com", new PhoneNumber("010-000-0000"), new Date());
 		int res = mapper.updateSetStudent(student);
 		Assert.assertEquals(1, res);
 		
-		student = new Member();
+		student = new Student();
 		student.setStudId(1);
 		
 		student.setPhone(new PhoneNumber("010-111-1111"));

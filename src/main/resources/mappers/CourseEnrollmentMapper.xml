@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring5_mybatis_study.mapper.CourseEnrollmentMapper">
+	
+	<resultMap type="CourseEnrollment" id="fuck">
+		<association property="student" javaType="Student" autoMapping="true">
+			<result column="s_name" property="name"/>
+		</association>
+		<association property="course" javaType="Course" autoMapping="true">
+			<result column="c_name" property="name"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectCourseEnrollmentById" resultMap="fuck">
+		select 	ce.stud_id, s.name as s_name, email, phone, dob, bio, pic, addr_id, gender, 
+				ce.course_id, c2.name as c_name, description, start_date, end_date, tutor_id
+		from course_enrollment ce 
+		join students s ON s.stud_id = ce.stud_id 
+		join courses c2 on c2.course_id = ce.course_id
+		where ce.course_id = #{course.courseId} 
+		and ce.stud_id = #{student.studId}
+	</select>
+
+	<insert id="insertCourseEnrollment">
+		insert into course_enrollment values (#{course.courseId} ,#{student.studId});
+	</insert>
+
+	<update id="updateCourseEnrollment">
+		update course_enrollment 
+		   set course_id = #{newCourseId} , stud_id = #{newStudId}
+		 where course_id = #{oldCourseId} and stud_id = #{oldStudId};
+	</update>
+
+	<delete id="deleteCourseEnrollment">
+		delete from course_enrollment where course_id = #{course.courseId} and stud_id = #{student.studId};
+	</delete>
+</mapper>

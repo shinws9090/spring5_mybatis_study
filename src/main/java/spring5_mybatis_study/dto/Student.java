@@ -2,7 +2,7 @@ package spring5_mybatis_study.dto;
 
 import java.util.Date;
 
-public class Member {
+public class Student {
 	private int studId;
 	private String name;
 	private String email;
@@ -11,9 +11,15 @@ public class Member {
 	private Address address;
 	private Gender gender;
 	
-	public Member() {
+	public Student() {
 	}
-	public Member(int studId, String name, String email, PhoneNumber phone, Date dob) {
+	
+	public Student(int studId) {
+		super();
+		this.studId = studId;
+	}
+
+	public Student(int studId, String name, String email, PhoneNumber phone, Date dob) {
 		super();
 		this.studId = studId;
 		this.name = name;

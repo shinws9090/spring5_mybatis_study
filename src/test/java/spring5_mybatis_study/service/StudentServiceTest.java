@@ -16,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import spring5_mybatis_study.config.ContextRoot;
-import spring5_mybatis_study.dto.Member;
+import spring5_mybatis_study.dto.Student;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,11 +51,11 @@ public class StudentServiceTest {
 	public void testSelectStudentForMap2() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Map<Integer, Member> map = service.selectStudentForMap2(1);
+		Map<Integer, Student> map = service.selectStudentForMap2(1);
 
 		Assert.assertNotNull(map);
 
-		for (Entry<Integer, Member> entry : map.entrySet()) {
+		for (Entry<Integer, Student> entry : map.entrySet()) {
 			System.out.printf("key(%s) - value(%s)%n", entry.getKey(), entry.getValue());
 		}
 
@@ -65,11 +65,11 @@ public class StudentServiceTest {
 	public void testSelectStudentForMap3() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Map<Integer, Member> map = service.selectStudentForMap();
+		Map<Integer, Student> map = service.selectStudentForMap();
 		
 		Assert.assertNotNull(map);
 		
-		for (Entry<Integer, Member> entry : map.entrySet()) {
+		for (Entry<Integer, Student> entry : map.entrySet()) {
 			System.out.printf("key(%s) - value(%s)%n", entry.getKey(), entry.getValue());
 		}
 		

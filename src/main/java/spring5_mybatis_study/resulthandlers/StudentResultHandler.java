@@ -6,9 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 
-import spring5_mybatis_study.dto.Member;
+import spring5_mybatis_study.dto.Student;
 
-public class StudentResultHandler implements ResultHandler<Member> {
+public class StudentResultHandler implements ResultHandler<Student> {
 	private Map<Integer, String> map = new HashMap<>();
 
 	
@@ -21,8 +21,8 @@ public class StudentResultHandler implements ResultHandler<Member> {
 	}
 
 	@Override
-	public void handleResult(ResultContext<? extends Member> resultContext) {
-		Member student = resultContext.getResultObject();
+	public void handleResult(ResultContext<? extends Student> resultContext) {
+		Student student = resultContext.getResultObject();
 		map.put(student.getStudId(),student.getName());
 	}
 

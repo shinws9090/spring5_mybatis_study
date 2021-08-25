@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import spring5_mybatis_study.dto.Member;
+import spring5_mybatis_study.dto.Student;
 import spring5_mybatis_study.mapper.StudentMapper;
 import spring5_mybatis_study.resulthandlers.StudentResultHandler;
 import spring5_mybatis_study.service.StudentService;
@@ -36,14 +36,14 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Map<Integer, Member> selectStudentForMap2(int studId) {
-		Map<Integer, Member> map = new HashMap<Integer, Member>();
+	public Map<Integer, Student> selectStudentForMap2(int studId) {
+		Map<Integer, Student> map = new HashMap<Integer, Student>();
 
-		ResultHandler<Member> handler = new ResultHandler<Member>() {
+		ResultHandler<Student> handler = new ResultHandler<Student>() {
 
 			@Override
-			public void handleResult(ResultContext<? extends Member> resultContext) {
-				Member student = resultContext.getResultObject();
+			public void handleResult(ResultContext<? extends Student> resultContext) {
+				Student student = resultContext.getResultObject();
 				map.put(student.getStudId(), student);
 			}
 		};
@@ -53,14 +53,14 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Map<Integer, Member> selectStudentForMap() {
-		Map<Integer, Member> map = new HashMap<Integer, Member>();
+	public Map<Integer, Student> selectStudentForMap() {
+		Map<Integer, Student> map = new HashMap<Integer, Student>();
 
-		ResultHandler<Member> handler = new ResultHandler<Member>() {
+		ResultHandler<Student> handler = new ResultHandler<Student>() {
 
 			@Override
-			public void handleResult(ResultContext<? extends Member> resultContext) {
-				Member student = resultContext.getResultObject();
+			public void handleResult(ResultContext<? extends Student> resultContext) {
+				Student student = resultContext.getResultObject();
 				map.put(student.getStudId(), student);
 			}
 		};

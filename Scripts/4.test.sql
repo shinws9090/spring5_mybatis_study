@@ -43,4 +43,20 @@ where tutor_id = 1;
 
 select course_id, name, description, start_date, end_data, tutor_id from courses WHERE tutor_id = 1;
 
+select 	ce.stud_id, s.name as s_name, email, phone, dob, bio, pic, addr_id, gender, 
+		ce.course_id, c2.name as c_name, description, start_date, end_date, tutor_id
+from course_enrollment ce 
+join students s ON s.stud_id = ce.stud_id 
+join courses c2 on c2.course_id = ce.course_id
+where ce.course_id = 1 and ce.stud_id = 1;
+
+select * from course_enrollment ce ;
+
+insert into course_enrollment values (2,1);
+
+update course_enrollment set course_id = 2 , stud_id = 1
+	where course_id = 2 and stud_id = 1;
+
+delete from course_enrollment where course_id = 2 and stud_id = 1;
+
 
